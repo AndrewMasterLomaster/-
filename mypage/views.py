@@ -10,6 +10,16 @@ def home(request):
 
 
 def secret_rage(request):
-    return render(request, "secret.html")
+    my_projects = [
+        'Создать личный блог на Django',
+        'Написать To-Do List для школы',
+        'Сделать сайт-визитку',
+        'Взломать Пентагон '
+    ]
+    context = {
+        "projects": my_projects
+    }
+    
+    return render(request, "secret.html", context)
     
     

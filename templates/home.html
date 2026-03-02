@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Главная страница</title>
-</head>
-<body style="background-color: #28a745; color: white; text-align: center; font-family: sans-serif; padding-top: 100px;">
-    <h1>Привет, {{ username }}!</h1>
-<p>Твой текущий статус: {{ status }}</p>
-    <h1>Ура! Теперь это настоящий HTML-файл</h1>
-    <p>Мы отделили дизайн от кода Python.</p>
-    <a href="/secret/" style="color: yellow; font-size: 20px;">[ ВОЙТИ В СЕКРЕТКУ ]</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Главная - AndrewMaster{% endblock %}
+
+{% block content %}
+<div style="background-color: #28a745; color: white; text-align: center; padding: 100px; height: 100vh;">
+    <h1>Привет, это главная страница!</h1>
+    <p>Меню сверху пришло из базового шаблона.</p>
+</div>
+{% endblock %}
