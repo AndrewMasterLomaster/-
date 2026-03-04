@@ -1,3 +1,4 @@
+from .models import ContactMessage
 from django.shortcuts import render
 
 def home(request):
@@ -24,12 +25,15 @@ def secret_rage(request):
 
 
 def contacts(request):
-    if request.method == "POST":
-        name = request.POST.get("user_name")
-        message = request.POST.get("user_message")
-        print(f"НОВОЕ СООБЩЕНИЕ! От: {name}. Текст: {message}")
-        return render(request, "contacts.html", {"status": 'Сообщение успешно отправлено!'})
-    
-    return render(request, "contacts.html")
-    
-    
+    if request.method == 'POST':
+        name = request.POST.get('user_name')
+        message = request.POST.get('user_message')
+        
+        # ВОТ ОНА — МАГИЯ СОХРАНЕНИЯ В БАЗУ ✍️
+        ContactMessage.objects.create(name=name, message=message)
+        
+        return render(request, 'contacts.html', {'status': 'СООБЩЕНИЕ СОХРАНЕНО В БАЗУ!'})
+
+    return render(request, 'contacts.html')
+
+
