@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if status %}
+    <h2 style="color: yellow;">{{ status }}</h2>
+{% endif %}
+
+<div style="background-color: #007bff; color: white; text-align: center; padding: 50px; min-height: 100vh;">
+    <h1>Связаться с AndrewMaster</h1>
+    
+    <!-- Сама форма -->
+    <form method="POST" style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; display: inline-block; width: 300px;">
+        {% csrf_token %} <!-- ЗАЩИТА ОТ ХАКЕРОВ (ОБЯЗАТЕЛЬНО!) -->
+        
+        <input type="text" name="user_name" placeholder="Твое имя" required 
+               style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;"><br>
+        
+        <textarea name="user_message" placeholder="Твое сообщение" required 
+                  style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none; height: 100px;"></textarea><br>
+        
+        <button type="submit" 
+                style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%;">
+            ОТПРАВИТЬ
+        </button>
+    </form>
+</div>
+{% endblock %}

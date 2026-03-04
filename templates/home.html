@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
-
-{% block title %}Главная - AndrewMaster{% endblock %}
+{% load static %}
 
 {% block content %}
-<div style="background-color: #28a745; color: white; text-align: center; padding: 100px; height: 100vh;">
-    <h1>Привет, это главная страница!</h1>
-    <p>Меню сверху пришло из базового шаблона.</p>
+<!-- Мы задаем картинку прямо в стилях фона (background) -->
+<div style="background: url('{% static 'hero.jpg' %}') no-repeat center center fixed; 
+            background-size: cover; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            color: white; 
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">
+    
+    <h1 style="font-size: 50px;">AndrewMasterLomaster</h1>
+    <p style="font-size: 20px;">Теперь мой сайт выглядит как у профи!</p>
+    
+    <br>
+    <a href="/secret/" style="color: yellow; font-weight: bold; font-size: 20px; text-decoration: none; border: 2px solid yellow; padding: 10px 20px; border-radius: 10px; background: rgba(0,0,0,0.5);">
+        [ ВОЙТИ В СЕКРЕТКУ ]
+    </a>
 </div>
 {% endblock %}

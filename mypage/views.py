@@ -21,5 +21,15 @@ def secret_rage(request):
     }
     
     return render(request, "secret.html", context)
+
+
+def contacts(request):
+    if request.method == "POST":
+        name = request.POST.get("user_name")
+        message = request.POST.get("user_message")
+        print(f"НОВОЕ СООБЩЕНИЕ! От: {name}. Текст: {message}")
+        return render(request, "contacts.html", {"status": 'Сообщение успешно отправлено!'})
+    
+    return render(request, "contacts.html")
     
     
