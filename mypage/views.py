@@ -36,7 +36,7 @@ def contacts(request):
 
     # ВАЖНО: Эти строки должны стоять БЕЗ лишних отступов (на уровне с "if")
     # Чтобы они срабатывали ПРИ ЛЮБОМ заходе на страницу
-    all_messages = ContactMessage.objects.all()
+    all_messages = ContactMessage.objects.all().order_by("-created_at")
     
     context = {
         'all_msgs': all_messages,

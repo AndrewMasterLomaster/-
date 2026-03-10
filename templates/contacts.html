@@ -29,7 +29,9 @@
                     <div class="card-body">
                         <h5 class="card-title text-primary">{{ m.name }}</h5>
                         <p class="card-text">{{ m.message }}</p>
-                        <p class="card-text"><small class="text-muted">{{ m.created_at }}</small></p>
+                        <p class="card-text">
+                            <small class="text-muted">{{ m.created_at|date:"d.m.Y H:i" }}</small>
+                        </p>
                     </div>
                 </div>
             </div>
