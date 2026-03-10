@@ -25,15 +25,25 @@ def secret_rage(request):
 
 
 def contacts(request):
+    status = None # Сначала статуса нет
+    
     if request.method == 'POST':
         name = request.POST.get('user_name')
         message = request.POST.get('user_message')
-        
-        # ВОТ ОНА — МАГИЯ СОХРАНЕНИЯ В БАЗУ ✍️
+        # Сохраняем в базу (один раз!)
         ContactMessage.objects.create(name=name, message=message)
-        
-        return render(request, 'contacts.html', {'status': 'СООБЩЕНИЕ СОХРАНЕНО В БАЗУ!'})
+        status = 'СООБЩЕНИЕ СОХРАНЕНО В БАЗУ!'
 
-    return render(request, 'contacts.html')
+    # ВАЖНО: Эти строки должны стоять БЕЗ лишних отступов (на уровне с "if")
+    # Чтобы они срабатывали ПРИ ЛЮБОМ заходе на страницу
+    all_messages = ContactMessage.objects.all()
+    
+    context = {
+        'all_msgs': all_messages,
+        'status': status
+    }
+    
+    return render(request, 'contacts.html', context)
+
 
 

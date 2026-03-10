@@ -24,4 +24,17 @@
         </button>
     </form>
 </div>
+<hr> <!-- Просто линия-разделитель -->
+<h2>Все сообщения из базы:</h2>
+
+<div style="text-align: left; display: inline-block; width: 400px;">
+    {% for m in all_msgs %}
+        <div style="background: rgba(255,255,255,0.2); margin-bottom: 10px; padding: 10px; border-radius: 10px;">
+            <strong>{{ m.name }}:</strong> 
+            <p>{{ m.message }}</p>
+            <small style="color: lightgray;">{{ m.created_at }}</small>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
