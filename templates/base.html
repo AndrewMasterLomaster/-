@@ -2,21 +2,31 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Мой Сайт{% endblock %}</title>
-    <style>
-        nav { background: #333; padding: 15px; text-align: center; }
-        nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
-        nav a:hover { color: #28a745; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}AndrewMaster{% endblock %}</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+
+    <!-- Подключаем Bootstrap один раз -->
+    
 </head>
-<body>
-    <nav>
-        <a href="/">ДОМОЙ</a>
-        <a href="/secret/">СЕКРЕТКА</a>
-        <a href="/contacts/">КОНТАКТЫ</a>
+<body class="bg-dark text-white"> <!-- Сделаем фон темным сразу для всех -->
+
+    <nav class="navbar navbar-dark bg-secondary mb-4 shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">AndrewMaster</a>
+            <div class="navbar-nav d-flex flex-row">
+                <a class="nav-link mx-2" href="/">Домой</a>
+                <a class="nav-link mx-2" href="/secret/">Секретка</a>
+                <a class="nav-link mx-2" href="/contacts/">Контакты</a>
+            </div>
+        </div>
     </nav>
 
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
 </body>
 </html>
