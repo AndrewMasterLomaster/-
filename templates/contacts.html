@@ -39,8 +39,10 @@
             <p class="card-text">{{ m.message }}</p>
             
             <!-- ВОТ ЭТА КНОПКА: -->
+        {% if user.is_authenticated %}
             <a href="/delete/{{ m.id }}/" class="btn btn-danger btn-sm shadow-sm" 
                onclick="return confirm('Точно удалить?')">УДАЛИТЬ</a>
+        {% endif %}
         </div>
         
             <div class="col-md-8">

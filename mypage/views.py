@@ -1,5 +1,13 @@
 from .models import ContactMessage
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+
+@login_required # ЭТОТ ЗАМОК НЕ ПУСТИТ АНОНИМОВ 🔐
+def delete_message(reuest, msg_id):
+    msg = Contactmessage.objects.get(id=msg_id)
+    msg.delete()
+    return  redirect("/contacts/")
 
 def home(request):
     context = {
@@ -10,18 +18,12 @@ def home(request):
 
 
 
-def secret_rage(request):
-    my_projects = [
-        'Создать личный блог на Django',
-        'Написать To-Do List для школы',
-        'Сделать сайт-визитку',
-        'Взломать Пентагон '
-    ]
-    context = {
-        "projects": my_projects
-    }
-    
-    return render(request, "secret.html", context)
+def secret_page(request):
+    # Твой список проектов, который мы делали раньше
+    my_projects = ['Взлом Пентагона', 'Сайт для кота', 'Секретка']
+    context = {'projects': my_projects}
+    return render(request, 'secret.html', context)
+
 
 
 def contacts(request):

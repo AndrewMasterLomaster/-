@@ -120,3 +120,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+LOGIN_REDIRECT_URL = '/'  # После входа — на главную
+LOGOUT_REDIRECT_URL = '/'  # После выхода — на главную страницу
+

@@ -19,6 +19,19 @@
                 <a class="nav-link mx-2" href="/">Домой</a>
                 <a class="nav-link mx-2" href="/secret/">Секретка</a>
                 <a class="nav-link mx-2" href="/contacts/">Контакты</a>
+                <!-- Ищи этот кусок в навигации -->
+{% if user.is_authenticated %}
+<span class="text-light me-2">Привет, {{ user.username }}!</span>
+
+<!-- ВМЕСТО ССЫЛКИ ПИШЕМ ЭТО: -->
+<form action="{% url 'logout' %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-danger btn-sm">Выйти</button>
+</form>
+{% else %}
+<a href="/login/" class="btn btn-outline-light btn-sm">Войти</a>
+{% endif %}
+
             </div>
         </div>
     </nav>
