@@ -1,6 +1,8 @@
 from .models import ContactMessage
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 
 @login_required # ЭТОТ ЗАМОК НЕ ПУСТИТ АНОНИМОВ 🔐
@@ -62,5 +64,20 @@ def delete_message(request, msg_id):
        # Возвращаемся обратно на страницу контактов
     return redirect("/contacts/")
 
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request. POST)
+        if form.is_valid():
+            user = form.save()# Создаем юзера в базе
+            login(request, user)# Сразу логиним его
+            return redirect ("/") # Кидаем на главную
+    else :
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})    
+        
+        
+            
+             
 
 

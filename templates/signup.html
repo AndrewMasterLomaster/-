@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация Мастера{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg p-4" style="width: 450px; border-radius: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white;">
+        <h3 class="text-center mb-4 text-warning fw-bold">НОВЫЙ МАСТЕР</h3>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Django сам создаст поля для логина и пароля тут -->
+            <div class="mb-3 signup-form text-dark">
+                {{ form.as_p }}
+            </div>
+            
+            <button type="submit" class="btn btn-warning w-100 fw-bold shadow">СОЗДАТЬ АККАУНТ</button>
+        </form>
+        
+        <p class="mt-3 text-center small">Уже есть доступ? <a href="/login/" class="text-warning">Войти</a></p>
+    </div>
+</div>
+
+<style>
+    /* Маленький хак, чтобы стандартные поля Django стали белыми и красивыми */
+    .signup-form p { color: white; }
+    .signup-form input { 
+        display: block; width: 100%; padding: 8px; margin-bottom: 10px; 
+        border-radius: 10px; border: none; 
+    }
+</style>
+{% endblock %}
