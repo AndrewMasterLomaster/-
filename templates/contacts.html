@@ -35,27 +35,28 @@
         
         {% for m in all_msgs %}
         <div class="card-body">
-            <h5 class="card-title text-primary">{{ m.name }}</h5>
+            <h5 class="card-title text-primary">
+                {{ m.name }}
+                <!-- Если у сообщения в базе есть автор, рисуем значок -->
+                {% if m.author %}
+                    <span class="badge rounded-pill bg-info text-dark ms-2" style="font-size: 0.6em;">
+                        @{{ m.author.username }}
+                    </span>
+                {% else %}
+                    <span class="badge rounded-pill bg-secondary ms-2" style="font-size: 0.6em;">
+                        Аноним
+                    </span>
+                {% endif %}
+            </h5>
+            
             <p class="card-text">{{ m.message }}</p>
             
-            <!-- ВОТ ЭТА КНОПКА: -->
-        {% if user.is_authenticated %}
-            <a href="/delete/{{ m.id }}/" class="btn btn-danger btn-sm shadow-sm" 
-               onclick="return confirm('Точно удалить?')">УДАЛИТЬ</a>
-        {% endif %}
+            <!-- Твоя кнопка УДАЛИТЬ остается здесь -->
+            {% if user.is_authenticated %}
+                <a href="/delete/{{ m.id }}/" class="btn btn-outline-danger btn-sm border-0" onclick="return confirm('Удалить?')">🗑️</a>
+            {% endif %}
         </div>
         
-            <div class="col-md-8">
-                <div class="card bg-light text-dark mb-3 shadow-sm border-0">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">{{ m.name }}</h5>
-                        <p class="card-text">{{ m.message }}</p>
-                        <p class="card-text">
-                            <small class="text-muted">{{ m.created_at|date:"d.m.Y H:i" }}</small>
-                        </p>
-                    </div>
-                </div>
-            </div>
         {% endfor %}
     </div>
 </div>

@@ -36,7 +36,19 @@ def contacts(request):
         name = request.POST.get('user_name')
         message = request.POST.get('user_message')
         ContactMessage.objects.create(name=name, message=message)
+        
         status = 'СООБЩЕНИЕ СОХРАНЕНО В БАЗУ!'
+        if name and message:
+             # 1. Создаем сообщение, но пока НЕ сохраняем в базу (commit=False)
+            # Или просто создаем и сразу прописываем автора:
+            new_msg = ContactMessage.objects.create(
+    name=name, 
+    message=message,  # ВОТ ТУТ ПОСТАВЬ ЗАПЯТУЮ! ✍️
+    author=request.user if request.user.is_authenticated else None
+)
+            status = "СООБЩЕНИЕ ОТПРАВЛЕНО!"
+        else:
+            status = "ОШИБКА: Заполни все поля!"
 
     # 2. Теперь ПОДГОТОВКА СПИСКА (всех сообщений)
     # Сначала берем всё и сортируем (самые новые сверху)
@@ -76,7 +88,12 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})    
         
-        
+
+@login_required # Только для залогиненных!
+def my_messages(request):
+     # Берем из базы только те сообщения, где автор — ТЫ
+     user_msgs = ContactMessage.objects.filter(author=request.user).order_by("-created_at")
+     return render(request, "my_messages.html", {"msgs": user_msgs})
             
              
 

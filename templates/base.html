@@ -22,18 +22,20 @@
                 <!-- Ищи этот кусок в навигации -->
                 <div class="ms-auto">
                     {% if user.is_authenticated %}
-                        <!-- Если вошел: показываем имя и кнопку Выхода -->
+                        <!-- ВОТ ЭТУ ССЫЛКУ МЫ ДОБАВЛЯЕМ: -->
+                        <a href="/profile/" class="btn btn-outline-warning btn-sm me-2">Мои посты</a>
+                        
                         <span class="text-light me-2">Привет, <b>{{ user.username }}</b>!</span>
                         <form action="{% url 'logout' %}" method="post" style="display: inline;">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-danger btn-sm">Выйти</button>
                         </form>
                     {% else %}
-                        <!-- Если НЕ вошел: показываем кнопки Регистрации и Входа -->
                         <a href="/signup/" class="btn btn-outline-warning btn-sm me-2">Регистрация</a>
                         <a href="/login/" class="btn btn-outline-light btn-sm">Войти</a>
                     {% endif %}
                 </div>
+                
                 
 
 
