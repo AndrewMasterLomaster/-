@@ -97,4 +97,12 @@ def my_messages(request):
             
              
 
+@login_required
+def delete_message(request, msg_id):
+    msg = ContactMessage.objects.get(id=msg_id)
+    # Проверка: удалять может только автор или админ
+    if msg.author == request.user or request.user.is_staff:
+        msg.delete()
+    return redirect("/contacts/")
+
 
